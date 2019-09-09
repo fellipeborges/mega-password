@@ -1,0 +1,229 @@
+﻿* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    font-size: 14px;
+}
+
+a {
+    color: #393939;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+button {
+    border: 1px solid #ccc;
+    padding: 3px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #fafafa;
+    color: #343333;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+    button:hover {
+        background-color: #ebe7e7;
+    }
+
+    button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+/*-------------------------------------------*/
+/*Main grid*/
+/*-------------------------------------------*/
+.maingrid-container {
+    display: grid;
+    grid-template-rows: 60px auto 30px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.maingrid-header {
+    background-color: #fff;
+}
+
+.maingrid-body {
+    background-color: #f5f5f5;
+}
+
+.maingrid-footer {
+    background-color: #fff;
+}
+
+/*-------------------------------------------*/
+/*Header grid*/
+/*-------------------------------------------*/
+.headergrid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    height: 60px;
+}
+
+.headergrid-logo {
+    text-align: left;
+    padding: 10px;
+}
+
+.headergrid-links {
+    text-align: right;
+    padding: 10px;
+    font-size: 12px;
+}
+
+    .headergrid-links .button-sound {
+        margin-top: 3px;
+    }
+
+/*-------------------------------------------*/
+/*Begin game grid*/
+/*-------------------------------------------*/
+.begingame-grid-container {
+    display: grid;
+    min-height: 0;
+    height: 100%;
+    grid-template-rows: 40% 20% 40%;
+}
+
+.begingame-grid-button {
+    grid-row: 2;
+    padding: 20px;
+    text-align: center;
+}
+
+    .begingame-grid-button button {
+        width: 65vw;
+        height: 20vh;
+        background-color: #171717;
+        color: #fff;
+        font-size: 5vw;
+    }
+
+/*-------------------------------------------*/
+/*On game grid*/
+/*-------------------------------------------*/
+.ongame-grid-container {
+    display: grid;
+    min-height: 0;
+    height: 100%;
+    grid-template-rows: 60% 40%;
+    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-areas: 'word word word word word word' 'chronometer chronometer chronometer score score score';
+}
+
+.ongame-grid-word {
+    grid-area: word;
+    text-align: center;
+    padding: 10px;
+    padding-top: 20px;
+    font-size: 7vw;
+}
+
+    .ongame-grid-word button {
+        width: 40vw;
+        height: 20vh;
+        color: #fff;
+        font-size: 5vw;
+    }
+
+    .ongame-grid-word .correct {
+        background-color: #17900a;
+    }
+        .ongame-grid-word .correct:hover {
+            background-color: #116907;
+        }
+
+    .ongame-grid-word .skip {
+        background-color: #bd1414;
+    }
+        .ongame-grid-word .skip:hover {
+            background-color: #920f0f;
+        }
+
+    .ongame-grid-word .start-another {
+        width: 65vw;
+        height: 20vh;
+        background-color: #171717;
+        color: #fff;
+        font-size: 5vw;
+        margin-top:60px;
+    }
+
+.ongame-grid-chronometer {
+    grid-area: chronometer;
+    background-color: #3d3c3c;
+    padding: 20px;
+}
+
+    .ongame-grid-chronometer .time {
+        color: #fff;
+        font-size: 7vw;
+    }
+
+    .ongame-grid-chronometer .endgame {
+        color: #fff;
+        font-size: 3vw;
+    }
+
+.ongame-grid-chronometer .button-play-pause {
+    color: #fff;
+    font-size: 3vw;
+    background-color: #3d3c3c;
+    border: none;
+}
+
+    .ongame-grid-chronometer .button-big {
+        width: 30vw;
+        height: 10vh;
+        font-size: 3vw;
+    }
+
+.ongame-grid-score {
+    grid-area: score;
+    /*background-color: #3d3c3c;*/
+    background-color: #8e8b8b;
+    padding: 20px;
+}
+
+    .ongame-grid-score .score {
+        color: #fff;
+        font-size: 7vw;
+    }
+    .ongame-grid-score .corrects,
+    .ongame-grid-score .skips {
+        color: #fff;
+        font-size: 3vw;
+    }
+
+/*-------------------------------------------*/
+/*Footer*/
+/*-------------------------------------------*/
+.footer {
+    text-align: center;
+    font-style: italic;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+/*-------------------------------------------*/
+/*Responsiveness*/
+/*-------------------------------------------*/
+@media (max-width: 1024px) {
+    .ongame-grid-container {
+        grid-template-rows: 50% 25% 25%;
+        grid-template-areas: 'word word word word word word' 'chronometer chronometer chronometer chronometer chronometer chronometer' 'score score score score score score';
+    }
+    kbd{
+        visibility:hidden;
+    }
+}

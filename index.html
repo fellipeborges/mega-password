@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Mega Password</title>
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="css/keys.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+    <!--3rd party scripts-->
+    <script src="Scripts/vue.min.js"></script>
+    <script src="Scripts/shortcut.min.js"></script>
+</head>
+<body>
+    <div id="app" class="maingrid-container">
+        <div class="maingrid-header">
+            <div class="headergrid-container">
+                <div class="headergrid-logo">
+                    <a href="index.html">
+                        <img src="images/mega_password_logo.png" alt="Mega Password" />
+                    </a>
+                </div>
+                <div class="headergrid-links">
+                    <a href="https://github.com/fellipeborges/mega-password" target="_blank" title="Código fonte no Github">Código fonte</a> <i class="fas fa-code"></i></a>
+                    <br />
+                    <button v-on:click="audio.on = !audio.on" class="button-sound">
+                        <span v-if="!audio.on">Ligar som <i class="fas fa-toggle-off"></i></span>
+                        <span v-if="audio.on">Desligar som <i class="fas fa-toggle-on"></i></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="maingrid-body">
+            <!--BEGIN GAME SCREEN-->
+            <div class="begingame-grid-container" v-if="currentMatch.state == 'off'">
+                <div class="begingame-grid-button">
+                    <button v-on:click="startMatch">Iniciar partida <kbd class="light">Espaço</kbd></button>
+                </div>
+            </div>
+            <!--ON-GAME SCREEN-->
+            <div class="ongame-grid-container" v-if="currentMatch.state != 'off'">
+                <div class="ongame-grid-word">
+                    <!-- Game is on-->
+                    <span v-if="currentMatch.state == 'on'">
+                        {{currentWord.word}}
+                        <br />
+                        <button class="correct" :disabled="chrono.state != 'on'" v-if="currentMatch.state == 'on'" v-on:click="setUserAnswer(true)">Acertou! <kbd class="light">&rarr;</kbd></button>
+                        <button class="skip" :disabled="chrono.state != 'on'" v-if="currentMatch.state == 'on'" v-on:click="setUserAnswer(false)">Pular! <kbd class="light">&nbsp;&darr;&nbsp;</kbd></button>
+                    </span>
+                    <!-- Game finished-->
+                    <span v-if="currentMatch.state == 'ended'">
+                        <button class="start-another" v-on:click="startMatch">Iniciar outra partida <kbd class="light">Espaço</kbd></button>
+                    </span>
+                </div>
+                
+                <div class="ongame-grid-chronometer" v-if="currentMatch.state != 'off'">
+                    <span class="time" v-if="currentMatch.state != 'ended'">{{timeStamp}}</span>
+                    <span class="time" v-if="currentMatch.state == 'ended'">Fim de jogo</span>
+                    &nbsp;
+                    <button class="button-play-pause" v-if="chrono.state == 'on' && currentMatch.state == 'on'" v-on:click="chronoPause" title="Pausar (espaço)"><i class="fas fa-pause"></i></button>
+                    <button class="button-play-pause" v-if="chrono.state == 'paused' && currentMatch.state == 'on'" v-on:click="chronoResume" title="Continuar (espaço)"><i class="fas fa-play"></i></button>
+                    <br />
+                    <button class="button-big" v-if="currentMatch.state == 'on'" v-on:click="resetMatch">Reiniciar <kbd class="light">Ctrl + x</kbd></button>
+                </div>
+                <div class="ongame-grid-score" v-if="currentMatch.state != 'off'">
+                    <span class="score">{{this.currentMatch.score}} pontos</span>
+                    <br /><span class="corrects">{{this.currentMatch.corrects}} acertos</span>
+                    <br /><span class="skips">{{this.currentMatch.skips}} pulos</span>
+                </div>
+            </div>
+        </div>
+        <div class="maingrid-footer">
+            <div class="footer">
+                Desenvolvido por <a href="https://www.linkedin.com/in/fellipe-borges-do-nascimento-168534a5/" target="_blank" title="Linkedin de Fellipe Borges">Fellipe Borges</a>
+            </div>
+        </div>
+    </div>
+    <script src="Scripts/App/wordApp.js"></script>
+    <script src="Scripts/App/screenShortcuts.js"></script>
+</body>
+</html>
